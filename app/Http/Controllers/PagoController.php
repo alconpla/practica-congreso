@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pago;
+use Auth;
 use Illuminate\Http\Request;
 
 class PagoController extends Controller
@@ -24,7 +25,7 @@ class PagoController extends Controller
      */
     public function create()
     {
-        //
+        return view("pago.create");
     }
 
     /**
@@ -35,7 +36,25 @@ class PagoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "documento" => "required"
+        ]);
+        
+        $file = $request->file("documento");
+
+        $str =  $file->getClientOriginalName();
+        $str = (explode(".", $str));
+        $name = strval(Auth::id()) .".pdf";
+        if ($str[1] === "pdf") {
+            $file->move('assets/pagos/', $name);
+            $pago = new Pago([
+                "iduser" => Auth::id(),
+                "documento" => $name
+            ]);
+            $pago->save();
+        }
+        
+        return redirect()->route('ponencia.index');
     }
 
     /**

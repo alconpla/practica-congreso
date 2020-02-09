@@ -6,7 +6,7 @@
   <div class="container">
     <h1 class="display-4">Ponencias</h1>
     <p class="lead">Consulta todas las ponencias del congreso.</p>
-    <a class="btn btn-primary" href="">Pagar congreso</a>
+    <a class="btn btn-primary" href="{{ route('pago.create') }}">Pagar congreso</a>
   </div>
 </div>
 <div class="container">

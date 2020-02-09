@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ponencia;
+use App\Pago;
 use Illuminate\Http\Request;
 use Auth;
 class PonenciaController extends Controller
@@ -49,7 +50,8 @@ class PonenciaController extends Controller
     {
         if (Auth::check()) {
             $ponencia = Ponencia::findOrFail($id);
-            return view('ponencia.detail', ['ponencia' => $ponencia]);
+            $pago = Pago::where('iduser', Auth::id())->first();
+            return view('ponencia.detail', ['ponencia' => $ponencia, 'pago' => $pago]);
         } else {
             return view('auth.login');
         }
