@@ -17,6 +17,7 @@
                     <input type="file" id="docuemento" name="documento">
                 </div>
                 <div class="form-group">
+                    <a class="btn btn-secondary" href="{{ route('ponencia.index') }}">Volver</a>
                     <input class="btn btn-primary" type="submit" value="Pagar">
                 </div>
             </form>

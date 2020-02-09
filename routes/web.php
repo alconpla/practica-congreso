@@ -24,3 +24,4 @@ Route::resource('pago', 'PagoController');
 Route::resource('ponencia', 'PonenciaController');
 Route::resource('user_ponencia', 'UserPonenciaController');
 Route::resource('usuario', 'UserController');
+

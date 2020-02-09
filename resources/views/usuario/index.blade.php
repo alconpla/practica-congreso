@@ -25,7 +25,7 @@
 			<div class="d-flex justify-content-between">
 			    <h2>Usuarios</h2>
 			       <div>
-			           <a href="" class="btn btn-success btn-sm">Añadir usuario</a>
+			           <a href="{{ route('usuario.create') }}" class="btn btn-success btn-sm">Añadir usuario</a>
 			       </div>
 			</div>
 			

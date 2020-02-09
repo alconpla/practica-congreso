@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Mail;
+use App\Mail\CorreoPonente;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,12 +18,24 @@ class UserController extends Controller
 
     public function create()
     {
-        //
+        return view("usuario.create");
     }
 
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "name"=>"required",
+            "email"=>"required",
+            "type"=>"required",
+            "password"=>"required"
+        ]);
+        
+        $user = User::create($request->all());
+        
+        $correo = $request->input('email');
+        Mail::to($correo)->send(new CorreoPonente($user));
+
+        return redirect()->route('usuario.index');
     }
 
     public function show(User $user)

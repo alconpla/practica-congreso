@@ -26,7 +26,7 @@ class PonenciaController extends Controller
      */
     public function create()
     {
-        //
+        return view('ponencia.create');
     }
 
     /**
@@ -37,7 +37,12 @@ class PonenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $input['iduser'] = Auth::id();
+        
+        Ponencia::create($input);
+        
+        return redirect()->route('ponencia.index');
     }
 
     /**
