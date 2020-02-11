@@ -40,7 +40,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         @auth
-                        @if (Auth::user()->type == 'admin')
+                        @if (Auth::user()->type == 'admin' || Auth::user()->type == 'comite')
                             <li class="nav-item">
                                 <a href="{{ route('usuario.index') }}" class="btn btn-primary btn">
                                     Ver usuarios

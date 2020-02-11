@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Mail;
+use Illuminate\Support\Facades\Hash;
 use App\Mail\CorreoPonente;
 use Illuminate\Http\Request;
 
@@ -24,14 +25,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "name"=>"required",
-            "email"=>"required",
-            "type"=>"required",
-            "password"=>"required"
+            'name'=>'required',
+            'email'=>'required',
+            'type'=>'required',
+            'password'=>'required'
         ]);
         
-        $user = User::create($request->all());
+        $unhashed_pw = $request['password'];
         
+        $user = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'type' => $request['type'],
+            'password' => Hash::make($request['password'])
+        ]);
+        
+        $user->password = $unhashed_pw;
         $correo = $request->input('email');
         Mail::to($correo)->send(new CorreoPonente($user));
 
